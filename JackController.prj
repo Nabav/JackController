@@ -1,0 +1,5 @@
+vhdl work "Jack_Controller_Main_State_Machine.vhd"
+vhdl work "Frame_Transmitter.vhd"
+vhdl work "Frame_Receiver.vhd"
+vhdl work "Debounce.vhd"
+vhdl work "JackController.vhd"
