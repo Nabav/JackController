@@ -30,6 +30,7 @@
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_STX" xil_pn:name="JackController.stx"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_REPORT" xil_pn:name="JackController.syr"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST" xil_pn:name="JackController.xst"/>
+    <file xil_pn:fileType="FILE_HTML" xil_pn:name="JackController_envsettings.html"/>
     <file xil_pn:fileType="FILE_HTML" xil_pn:name="JackController_summary.html"/>
     <file xil_pn:fileType="FILE_XRPT" xil_pn:name="JackController_xst.xrpt"/>
     <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/xst.xmsgs"/>
@@ -62,7 +63,7 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1481196335" xil_pn:in_ck="4487774644716223180" xil_pn:name="TRANEXT_xstsynthesize_spartan6" xil_pn:prop_ck="619452065528776870" xil_pn:start_ts="1481196328">
+    <transform xil_pn:end_ts="1481660504" xil_pn:in_ck="4487774644716223180" xil_pn:name="TRANEXT_xstsynthesize_spartan6" xil_pn:prop_ck="619452065528776870" xil_pn:start_ts="1481660498">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>

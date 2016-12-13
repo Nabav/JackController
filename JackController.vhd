@@ -17,8 +17,7 @@ entity JackController is
 		Parameter_Bank_Write_Request : out std_logic;
 		Parameter_Bank_Write_Address : out std_logic_vector(7 downto 0);
 		Parameter_Bank_Write_Data : out std_logic_vector(15 downto 0);
-		Parameter_Bank_Write_Done : in std_logic;
-		debug_pin : out std_logic_vector(31 downto 0)
+		Parameter_Bank_Write_Done : in std_logic
 	);
 end JackController;
 
@@ -89,7 +88,6 @@ architecture Behavioral of JackController is
 	signal Tx_Parameter_Address : std_logic_vector(7 downto 0) := (others => '0');
 	signal Tx_Parameter_Value : std_logic_vector(15 downto 0) := (others => '0');
 	signal Tx_Busy : std_logic := '0';
-
 	signal RX_RS485_F : std_logic := '1';	
 	signal Rx_Ready : std_logic := '0';
 	signal Rx_Frame_Type : std_logic_vector(1 downto 0) := (others => '0');
@@ -97,7 +95,6 @@ architecture Behavioral of JackController is
 	signal Rx_Parameter_Address : std_logic_vector(7 downto 0) := (others => '0');
 	signal Rx_Parameter_Value : std_logic_vector(15 downto 0) := (others => '0');
 begin
-	
 	RS485_Frame_Transmitter : Frame_Transmitter
 		port map ( 
 			clk => clk,
@@ -109,7 +106,6 @@ begin
 			Tx_Parameter_Value => Tx_Parameter_Value,
 			Tx_Busy => Tx_Busy
 		);
-
 	RX_RS485_Debounce_Filter : Debounce
 		generic map (
 			depth => 4
@@ -119,7 +115,6 @@ begin
 			original => RX_RS485,
 			filtered => RX_RS485_F
 		);
-	
 	 RS485_Frame_Receiver : Frame_Receiver
 		port map ( 
 			clk => clk,
@@ -130,7 +125,6 @@ begin
 			Rx_Parameter_Address => Rx_Parameter_Address,
 			Rx_Parameter_Value => Rx_Parameter_Value
 		);
-
 	Main_FSM : Jack_Controller_Main_State_Machine
 		port map ( 
 			clk => clk,
@@ -156,11 +150,4 @@ begin
 			Parameter_Bank_Write_Data => Parameter_Bank_Write_Data,
 			Parameter_Bank_Write_Done => Parameter_Bank_Write_Done
 		);
-	
---	debug_pin(0) <= PC_Rx_Data_Ready;
---	debug_pin(2 downto 1) <= Rx_Frame_Type;
---	debug_pin(5 downto 3) <= Rx_Jack_Nember;
---	debug_pin(13 downto 6) <= Rx_Parameter_Address;
---	debug_pin(29 downto 14) <= Rx_Parameter_Value;
 end Behavioral;
-

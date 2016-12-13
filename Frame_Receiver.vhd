@@ -24,17 +24,18 @@ architecture Behavioral of Frame_Receiver is
 	signal checksum : std_logic_vector(7 downto 0) := (others => '0');
 	signal bit_number : integer range 0 to 39 := 39;
 	signal low_duration_counter : integer range 0 to 3 * baudrate_prescaler := 0;
+	signal high_duration_counter : integer range 0 to 4 * baudrate_prescaler := 0;
 	signal threshold : std_logic := '0';
 	signal fresh_bit_received : std_logic := '0';
 begin
-	Low_State_Duration_Counter: process(clk)
+	Receive_Shift_Register: process(clk)
 		variable RX_RS485_old : std_logic := '0';
 	begin
 		if rising_edge(clk) then
 			if (RX_RS485_old = '1' and RX_RS485 = '0') then
 				low_duration_counter <= 0;
 			elsif ((low_duration_counter < 3 * baudrate_prescaler) and (RX_RS485 = '0')) then
-				low_duration_counter <= low_duration_counter + 1;				
+				low_duration_counter <= low_duration_counter + 1;
 			elsif (RX_RS485_old = '0' and RX_RS485 = '1') then
 				Rx_Buffer <= Rx_Buffer(38 downto 0) & threshold;
 				fresh_bit_received <= '1';
@@ -47,6 +48,7 @@ begin
 					Rx_Jack_Nember <= Rx_Buffer(34 downto 32);
 					Rx_Parameter_Address <= Rx_Buffer(31 downto 24);
 					Rx_Parameter_Value <= Rx_Buffer(23 downto 8);
+					Rx_Buffer <= (others => '0');
 				else
 					Rx_Ready <= '0';
 				end if;
@@ -62,5 +64,4 @@ begin
 				Rx_Buffer(23 downto 16) +
 				Rx_Buffer(15 downto 8) +
 				Rx_Buffer(7 downto 0);
-
 end Behavioral;

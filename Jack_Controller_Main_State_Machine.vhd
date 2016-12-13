@@ -31,7 +31,7 @@ entity Jack_Controller_Main_State_Machine is
 end Jack_Controller_Main_State_Machine;
 
 architecture Behavioral of Jack_Controller_Main_State_Machine is
-	constant max_timeout : integer := 3000;
+	constant max_timeout : integer := 5000;
 	type FSM_state_type is (idle, decode,
 							write_parameter, wait_for_write_done,
 							read_parameter, wait_for_read_response, transmit_read_response, wait_for_transmit_read_response_done
@@ -83,6 +83,7 @@ begin
 				when wait_for_read_response =>
 					timeout_counter := timeout_counter + 1;
 					if (Parameter_Bank_Read_Response_old = '0' and Parameter_Bank_Read_Response = '1') then
+						timeout_counter := 0;
 						Tx_Frame_Type <= "11";
 						Tx_Jack_Nember <= Rx_Jack_Nember;
 						Tx_Parameter_Address <= Rx_Parameter_Address;
@@ -97,7 +98,7 @@ begin
 					state <= wait_for_transmit_read_response_done;
 				when wait_for_transmit_read_response_done =>
 					timeout_counter := timeout_counter + 1;
-					if ((Tx_Busy_old = '0' and Tx_Busy = '1') or (timeout_counter = max_timeout)) then
+					if ((Tx_Busy_old = '1' and Tx_Busy = '0') or (timeout_counter = max_timeout)) then
 						state <= idle;
 						timeout_counter := 0;
 					end if;

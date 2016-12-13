@@ -5,14 +5,14 @@ Parameter TMPDIR set to xst/projnav.tmp
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.05 secs
+Total CPU time to Xst completion: 0.03 secs
  
 --> 
 Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.05 secs
+Total CPU time to Xst completion: 0.03 secs
  
 --> 
 Reading design: JackController.prj
@@ -153,6 +153,7 @@ Synthesizing Unit <Frame_Transmitter>.
     Found 1-bit register for signal <TX_RS485>.
     Found 1-bit register for signal <Tx_Busy>.
     Found 6-bit register for signal <bit_number>.
+    Found 3-bit register for signal <bus_hold_counter>.
     Found 3-bit register for signal <state>.
     Found 1-bit register for signal <Tx_Buffer<39>>.
     Found 1-bit register for signal <Tx_Buffer<38>>.
@@ -188,30 +189,33 @@ Synthesizing Unit <Frame_Transmitter>.
     Found 1-bit register for signal <Tx_Buffer<8>>.
     Found 1-bit register for signal <Frame_Tx_FSM.Tx_Start_old>.
     Found 6-bit register for signal <baudrate_prescaler_counter>.
+INFO:Xst:1799 - State hold_bus_idle is never reached in FSM <state>.
     Found finite state machine <FSM_0> for signal <state>.
     -----------------------------------------------------------------------
-    | States             | 6                                              |
+    | States             | 7                                              |
     | Transitions        | 12                                             |
-    | Inputs             | 4                                              |
+    | Inputs             | 5                                              |
     | Outputs            | 4                                              |
     | Clock              | clk (rising_edge)                              |
     | Power Up State     | idle                                           |
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 6-bit adder for signal <baudrate_prescaler_counter[5]_GND_7_o_add_1_OUT> created at line 37.
-    Found 6-bit subtractor for signal <GND_7_o_GND_7_o_sub_13_OUT<5:0>> created at line 70.
-    Found 8-bit adder for signal <_n0145> created at line 25.
-    Found 8-bit adder for signal <_n0146> created at line 25.
-    Found 8-bit adder for signal <_n0147> created at line 25.
+    Found 6-bit adder for signal <baudrate_prescaler_counter[5]_GND_7_o_add_1_OUT> created at line 38.
+    Found 3-bit adder for signal <bus_hold_counter[2]_GND_7_o_add_17_OUT> created at line 81.
+    Found 6-bit subtractor for signal <GND_7_o_GND_7_o_sub_13_OUT<5:0>> created at line 72.
+    Found 8-bit adder for signal <_n0162> created at line 25.
+    Found 8-bit adder for signal <_n0163> created at line 25.
+    Found 8-bit adder for signal <_n0164> created at line 25.
     Found 8-bit subtractor for signal <checksum> created at line 25.
-    Found 1-bit 40-to-1 multiplexer for signal <bit_number[5]_X_7_o_Mux_7_o> created at line 60.
-    Found 6-bit comparator greater for signal <n0000> created at line 34
+    Found 1-bit 40-to-1 multiplexer for signal <bit_number[5]_X_7_o_Mux_7_o> created at line 62.
+    Found 6-bit comparator greater for signal <n0000> created at line 35
+    Found 3-bit comparator greater for signal <bus_hold_counter[2]_PWR_7_o_LessThan_17_o> created at line 80
     Summary:
-	inferred   6 Adder/Subtractor(s).
-	inferred  46 D-type flip-flop(s).
-	inferred   1 Comparator(s).
-	inferred   6 Multiplexer(s).
+	inferred   7 Adder/Subtractor(s).
+	inferred  49 D-type flip-flop(s).
+	inferred   2 Comparator(s).
+	inferred   8 Multiplexer(s).
 	inferred   1 Finite State Machine(s).
 Unit <Frame_Transmitter> synthesized.
 
@@ -233,15 +237,15 @@ Synthesizing Unit <Frame_Receiver>.
     Found 3-bit register for signal <Rx_Jack_Nember>.
     Found 8-bit register for signal <Rx_Parameter_Address>.
     Found 16-bit register for signal <Rx_Parameter_Value>.
-    Found 1-bit register for signal <Low_State_Duration_Counter.RX_RS485_old>.
+    Found 1-bit register for signal <Receive_Shift_Register.RX_RS485_old>.
     Found 7-bit register for signal <low_duration_counter>.
-    Found 7-bit adder for signal <low_duration_counter[6]_GND_9_o_add_1_OUT> created at line 37.
-    Found 8-bit adder for signal <n0073> created at line 60.
-    Found 8-bit adder for signal <n0076> created at line 60.
-    Found 8-bit adder for signal <n0079> created at line 60.
-    Found 8-bit adder for signal <checksum> created at line 60.
-    Found 7-bit comparator greater for signal <low_duration_counter[6]_PWR_11_o_LessThan_1_o> created at line 36
-    Found 7-bit comparator lessequal for signal <low_duration_counter[6]_GND_9_o_LessThan_24_o> created at line 58
+    Found 7-bit adder for signal <low_duration_counter[6]_GND_9_o_add_1_OUT> created at line 38.
+    Found 8-bit adder for signal <n0077> created at line 62.
+    Found 8-bit adder for signal <n0080> created at line 62.
+    Found 8-bit adder for signal <n0083> created at line 62.
+    Found 8-bit adder for signal <checksum> created at line 62.
+    Found 7-bit comparator greater for signal <low_duration_counter[6]_PWR_11_o_LessThan_1_o> created at line 37
+    Found 7-bit comparator lessequal for signal <low_duration_counter[6]_GND_9_o_LessThan_26_o> created at line 60
     Summary:
 	inferred   5 Adder/Subtractor(s).
 	inferred  79 D-type flip-flop(s).
@@ -264,7 +268,7 @@ Synthesizing Unit <Jack_Controller_Main_State_Machine>.
     Found 1-bit register for signal <Main_FSM.Rx_Ready_old>.
     Found 1-bit register for signal <Main_FSM.Parameter_Bank_Read_Response_old>.
     Found 1-bit register for signal <Main_FSM.Parameter_Bank_Write_Done_old>.
-    Found 12-bit register for signal <Main_FSM.timeout_counter>.
+    Found 13-bit register for signal <Main_FSM.timeout_counter>.
     Found finite state machine <FSM_1> for signal <state>.
     -----------------------------------------------------------------------
     | States             | 8                                              |
@@ -276,11 +280,11 @@ Synthesizing Unit <Jack_Controller_Main_State_Machine>.
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 12-bit adder for signal <Main_FSM.timeout_counter[11]_GND_10_o_add_26_OUT> created at line 99.
+    Found 13-bit adder for signal <Main_FSM.timeout_counter[12]_GND_10_o_add_26_OUT> created at line 100.
     Found 3-bit comparator equal for signal <Rx_Jack_Nember[2]_Parameter_Bank_Jack_ID[2]_equal_6_o> created at line 65
     Summary:
 	inferred   1 Adder/Subtractor(s).
-	inferred  78 D-type flip-flop(s).
+	inferred  79 D-type flip-flop(s).
 	inferred   1 Comparator(s).
 	inferred   7 Multiplexer(s).
 	inferred   1 Finite State Machine(s).
@@ -290,33 +294,36 @@ Unit <Jack_Controller_Main_State_Machine> synthesized.
 HDL Synthesis Report
 
 Macro Statistics
-# Adders/Subtractors                                   : 12
- 12-bit adder                                          : 1
+# Adders/Subtractors                                   : 13
+ 13-bit adder                                          : 1
+ 3-bit adder                                           : 1
  6-bit adder                                           : 1
  6-bit subtractor                                      : 1
  7-bit adder                                           : 1
  8-bit adder                                           : 7
  8-bit subtractor                                      : 1
-# Registers                                            : 40
+# Registers                                            : 41
  1-bit register                                        : 21
- 12-bit register                                       : 1
+ 13-bit register                                       : 1
  16-bit register                                       : 3
  2-bit register                                        : 1
- 3-bit register                                        : 2
+ 3-bit register                                        : 3
  4-bit register                                        : 1
  40-bit register                                       : 1
  6-bit register                                        : 2
  7-bit register                                        : 1
  8-bit register                                        : 7
-# Comparators                                          : 4
+# Comparators                                          : 5
  3-bit comparator equal                                : 1
+ 3-bit comparator greater                              : 1
  6-bit comparator greater                              : 1
  7-bit comparator greater                              : 1
  7-bit comparator lessequal                            : 1
-# Multiplexers                                         : 13
+# Multiplexers                                         : 15
  1-bit 2-to-1 multiplexer                              : 3
  1-bit 40-to-1 multiplexer                             : 1
- 12-bit 2-to-1 multiplexer                             : 7
+ 13-bit 2-to-1 multiplexer                             : 7
+ 3-bit 2-to-1 multiplexer                              : 2
  6-bit 2-to-1 multiplexer                              : 2
 # FSMs                                                 : 2
 
@@ -337,21 +344,22 @@ WARNING:Xst:1426 - The value init of the FF/Latch Tx_Buffer_39 hinder the consta
 Synthesizing (advanced) Unit <Frame_Receiver>.
 The following registers are absorbed into counter <low_duration_counter>: 1 register on signal <low_duration_counter>.
 	The following adders/subtractors are grouped into adder tree <Madd_checksum1> :
- 	<Madd_n0073> in block <Frame_Receiver>, 	<Madd_n0076> in block <Frame_Receiver>, 	<Madd_n0079> in block <Frame_Receiver>, 	<Madd_checksum> in block <Frame_Receiver>.
+ 	<Madd_n0077> in block <Frame_Receiver>, 	<Madd_n0080> in block <Frame_Receiver>, 	<Madd_n0083> in block <Frame_Receiver>, 	<Madd_checksum> in block <Frame_Receiver>.
 Unit <Frame_Receiver> synthesized (advanced).
 
 Synthesizing (advanced) Unit <Frame_Transmitter>.
 The following registers are absorbed into counter <baudrate_prescaler_counter>: 1 register on signal <baudrate_prescaler_counter>.
-	The following adders/subtractors are grouped into adder tree <Madd__n01471> :
- 	<Madd__n0145> in block <Frame_Transmitter>, 	<Madd__n0146> in block <Frame_Transmitter>.
+	The following adders/subtractors are grouped into adder tree <Madd__n01641> :
+ 	<Madd__n0162> in block <Frame_Transmitter>, 	<Madd__n0163> in block <Frame_Transmitter>.
 Unit <Frame_Transmitter> synthesized (advanced).
 
 =========================================================================
 Advanced HDL Synthesis Report
 
 Macro Statistics
-# Adders/Subtractors                                   : 3
- 12-bit adder                                          : 1
+# Adders/Subtractors                                   : 4
+ 13-bit adder                                          : 1
+ 3-bit adder                                           : 1
  6-bit subtractor                                      : 1
  8-bit subtractor                                      : 1
 # Adder Trees                                          : 2
@@ -360,17 +368,19 @@ Macro Statistics
 # Counters                                             : 2
  6-bit up counter                                      : 1
  7-bit up counter                                      : 1
-# Registers                                            : 195
- Flip-Flops                                            : 195
-# Comparators                                          : 4
+# Registers                                            : 199
+ Flip-Flops                                            : 199
+# Comparators                                          : 5
  3-bit comparator equal                                : 1
+ 3-bit comparator greater                              : 1
  6-bit comparator greater                              : 1
  7-bit comparator greater                              : 1
  7-bit comparator lessequal                            : 1
-# Multiplexers                                         : 13
+# Multiplexers                                         : 15
  1-bit 2-to-1 multiplexer                              : 3
  1-bit 40-to-1 multiplexer                             : 1
- 12-bit 2-to-1 multiplexer                             : 7
+ 13-bit 2-to-1 multiplexer                             : 7
+ 3-bit 2-to-1 multiplexer                              : 2
  6-bit 2-to-1 multiplexer                              : 2
 # FSMs                                                 : 2
 
@@ -383,7 +393,7 @@ WARNING:Xst:1426 - The value init of the FF/Latch Tx_Buffer_37 hinder the consta
    You should achieve better results by setting this init to 1.
 WARNING:Xst:1426 - The value init of the FF/Latch Tx_Buffer_39 hinder the constant cleaning in the block Frame_Transmitter.
    You should achieve better results by setting this init to 1.
-INFO:Xst:2261 - The FF/Latch <Tx_Buffer_37> in Unit <Frame_Transmitter> is equivalent to the following FF/Latch, which will be removed : <Tx_Buffer_39> 
+INFO:Xst:2261 - The FF/Latch <Tx_Buffer_39> in Unit <Frame_Transmitter> is equivalent to the following FF/Latch, which will be removed : <Tx_Buffer_37> 
 Analyzing FSM <MFsm> for best encoding.
 Optimizing FSM <Main_FSM/FSM_1> on signal <state[1:3]> with user encoding.
 --------------------------------------------------
@@ -409,7 +419,11 @@ Optimizing FSM <RS485_Frame_Transmitter/FSM_0> on signal <state[1:3]> with user 
  send_bit         | 011
  send_high        | 100
  prepare_next_bit | 101
+ hold_bus_idle    | unreached
 ------------------------------
+WARNING:Xst:2677 - Node <bus_hold_counter_0> of sequential type is unconnected in block <Frame_Transmitter>.
+WARNING:Xst:2677 - Node <bus_hold_counter_1> of sequential type is unconnected in block <Frame_Transmitter>.
+WARNING:Xst:2677 - Node <bus_hold_counter_2> of sequential type is unconnected in block <Frame_Transmitter>.
 
 Optimizing unit <JackController> ...
 
@@ -423,7 +437,7 @@ WARNING:Xst:1426 - The value init of the FF/Latch RS485_Frame_Transmitter/Tx_Buf
 WARNING:Xst:1426 - The value init of the FF/Latch RS485_Frame_Transmitter/Tx_Buffer_36 hinder the constant cleaning in the block JackController.
    You should achieve better results by setting this init to 1.
 WARNING:Xst:1293 - FF/Latch <RS485_Frame_Transmitter/baudrate_prescaler_counter_5> has a constant value of 0 in block <JackController>. This FF/Latch will be trimmed during the optimization process.
-INFO:Xst:2261 - The FF/Latch <RS485_Frame_Transmitter/Tx_Buffer_35> in Unit <JackController> is equivalent to the following 2 FFs/Latches, which will be removed : <RS485_Frame_Transmitter/Tx_Buffer_36> <RS485_Frame_Transmitter/Tx_Buffer_37> 
+INFO:Xst:2261 - The FF/Latch <RS485_Frame_Transmitter/Tx_Buffer_35> in Unit <JackController> is equivalent to the following 2 FFs/Latches, which will be removed : <RS485_Frame_Transmitter/Tx_Buffer_36> <RS485_Frame_Transmitter/Tx_Buffer_39> 
 
 Mapping all equations...
 Building and optimizing final netlist ...
@@ -435,8 +449,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 210
- Flip-Flops                                            : 210
+# Registers                                            : 211
+ Flip-Flops                                            : 211
 
 =========================================================================
 
@@ -459,22 +473,22 @@ Top Level Output File Name         : JackController.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 290
+# BELS                             : 335
 #      GND                         : 1
 #      INV                         : 3
-#      LUT1                        : 10
-#      LUT2                        : 23
-#      LUT3                        : 41
+#      LUT1                        : 11
+#      LUT2                        : 25
+#      LUT3                        : 45
 #      LUT4                        : 65
-#      LUT5                        : 15
-#      LUT6                        : 44
-#      MUXCY                       : 39
+#      LUT5                        : 18
+#      LUT6                        : 77
+#      MUXCY                       : 40
 #      MUXF7                       : 4
 #      VCC                         : 1
-#      XORCY                       : 44
-# FlipFlops/Latches                : 210
-#      FD                          : 23
-#      FDE                         : 175
+#      XORCY                       : 45
+# FlipFlops/Latches                : 211
+#      FD                          : 63
+#      FDE                         : 136
 #      FDR                         : 5
 #      FDRE                        : 7
 # Clock Buffers                    : 1
@@ -490,19 +504,19 @@ Selected Device : 6slx45fgg484-3
 
 
 Slice Logic Utilization: 
- Number of Slice Registers:             210  out of  54576     0%  
- Number of Slice LUTs:                  201  out of  27288     0%  
-    Number used as Logic:               201  out of  27288     0%  
+ Number of Slice Registers:             211  out of  54576     0%  
+ Number of Slice LUTs:                  244  out of  27288     0%  
+    Number used as Logic:               244  out of  27288     0%  
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:    317
-   Number with an unused Flip Flop:     107  out of    317    33%  
-   Number with an unused LUT:           116  out of    317    36%  
-   Number of fully used LUT-FF pairs:    94  out of    317    29%  
-   Number of unique control sets:        12
+ Number of LUT Flip Flop pairs used:    323
+   Number with an unused Flip Flop:     112  out of    323    34%  
+   Number with an unused LUT:            79  out of    323    24%  
+   Number of fully used LUT-FF pairs:   132  out of    323    40%  
+   Number of unique control sets:        11
 
 IO Utilization: 
- Number of IOs:                          91
+ Number of IOs:                          59
  Number of bonded IOBs:                  59  out of    316    18%  
 
 Specific Feature Utilization:
@@ -529,7 +543,7 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-clk                                | BUFGP                  | 210   |
+clk                                | BUFGP                  | 211   |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -541,8 +555,8 @@ Timing Summary:
 Speed Grade: -3
 
    Minimum period: 7.440ns (Maximum Frequency: 134.414MHz)
-   Minimum input arrival time before clock: 5.464ns
-   Maximum output required time after clock: 3.762ns
+   Minimum input arrival time before clock: 5.045ns
+   Maximum output required time after clock: 3.732ns
    Maximum combinational path delay: No path found
 
 Timing Details:
@@ -552,7 +566,7 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
   Clock period: 7.440ns (frequency: 134.414MHz)
-  Total number of paths / destination ports: 62103 / 384
+  Total number of paths / destination ports: 134313 / 346
 -------------------------------------------------------------------------
 Delay:               7.440ns (Levels of Logic = 11)
   Source:            RS485_Frame_Transmitter/Tx_Buffer_16 (FF)
@@ -573,9 +587,9 @@ Delay:               7.440ns (Levels of Logic = 11)
      MUXCY:S->O            1   0.172   0.000  RS485_Frame_Transmitter/ADDERTREE_INTERNAL_Madd2_cy<0>_1 (RS485_Frame_Transmitter/ADDERTREE_INTERNAL_Madd2_cy<0>2)
      XORCY:CI->O           5   0.180   0.715  RS485_Frame_Transmitter/ADDERTREE_INTERNAL_Madd2_xor<0>_2 (RS485_Frame_Transmitter/ADDERTREE_INTERNAL_Madd_32)
      LUT6:I5->O            2   0.205   0.616  RS485_Frame_Transmitter/Mmux_bit_number[5]_X_7_o_Mux_7_o_102 (RS485_Frame_Transmitter/Mmux_bit_number[5]_X_7_o_Mux_7_o_102)
-     MUXF7:S->O            3   0.148   0.755  RS485_Frame_Transmitter/Mmux_bit_number[5]_X_7_o_Mux_7_o_6_SW1 (N34)
-     LUT6:I4->O            1   0.203   0.808  RS485_Frame_Transmitter/Mmux_bit_number[5]_X_7_o_Mux_7_o_111_SW2 (N42)
-     LUT6:I3->O            1   0.205   0.000  RS485_Frame_Transmitter/Mmux_state[2]_X_7_o_Mux_15_o11 (RS485_Frame_Transmitter/state[2]_X_7_o_Mux_15_o)
+     MUXF7:S->O            3   0.148   0.755  RS485_Frame_Transmitter/Mmux_bit_number[5]_X_7_o_Mux_7_o_6_SW1 (N18)
+     LUT6:I4->O            1   0.203   0.808  RS485_Frame_Transmitter/Mmux_bit_number[5]_X_7_o_Mux_7_o_111_SW2 (N22)
+     LUT6:I3->O            1   0.205   0.000  RS485_Frame_Transmitter/Mmux_state[2]_X_7_o_Mux_22_o11 (RS485_Frame_Transmitter/state[2]_X_7_o_Mux_22_o)
      FDE:D                     0.102          RS485_Frame_Transmitter/TX_RS485
     ----------------------------------------
     Total                      7.440ns (2.627ns logic, 4.813ns route)
@@ -583,31 +597,30 @@ Delay:               7.440ns (Levels of Logic = 11)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
-  Total number of paths / destination ports: 172 / 93
+  Total number of paths / destination ports: 179 / 94
 -------------------------------------------------------------------------
-Offset:              5.464ns (Levels of Logic = 4)
+Offset:              5.045ns (Levels of Logic = 3)
   Source:            Parameter_Bank_Jack_ID<0> (PAD)
-  Destination:       Main_FSM/Parameter_Bank_Read_Address_7 (FF)
+  Destination:       Main_FSM/Parameter_Bank_Write_Data_15 (FF)
   Destination Clock: clk rising
 
-  Data Path: Parameter_Bank_Jack_ID<0> to Main_FSM/Parameter_Bank_Read_Address_7
+  Data Path: Parameter_Bank_Jack_ID<0> to Main_FSM/Parameter_Bank_Write_Data_15
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O             2   1.222   0.721  Parameter_Bank_Jack_ID_0_IBUF (Parameter_Bank_Jack_ID_0_IBUF)
-     LUT3:I1->O            1   0.203   0.924  Main_FSM/state_FSM_FFd1-In5_SW0 (N4)
-     LUT6:I1->O            2   0.203   0.864  Main_FSM/state_FSM_FFd1-In5 (Main_FSM/state_FSM_FFd1-In5)
-     LUT4:I0->O            8   0.203   0.802  Main_FSM/_n0195_inv1 (Main_FSM/_n0195_inv)
-     FDE:CE                    0.322          Main_FSM/Parameter_Bank_Read_Address_0
+     IBUF:I->O             2   1.222   0.961  Parameter_Bank_Jack_ID_0_IBUF (Parameter_Bank_Jack_ID_0_IBUF)
+     LUT6:I1->O            2   0.203   0.961  Main_FSM/_n0184_inv11 (Main_FSM/_n0184_inv11)
+     LUT6:I1->O           24   0.203   1.172  Main_FSM/_n0184_inv2 (Main_FSM/_n0184_inv)
+     FDE:CE                    0.322          Main_FSM/Parameter_Bank_Write_Address_0
     ----------------------------------------
-    Total                      5.464ns (2.153ns logic, 3.311ns route)
-                                       (39.4% logic, 60.6% route)
+    Total                      5.045ns (1.950ns logic, 3.095ns route)
+                                       (38.7% logic, 61.3% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
   Total number of paths / destination ports: 36 / 36
 -------------------------------------------------------------------------
-Offset:              3.762ns (Levels of Logic = 1)
+Offset:              3.732ns (Levels of Logic = 1)
   Source:            RS485_Frame_Transmitter/Tx_Busy (FF)
   Destination:       DIR_RS485 (PAD)
   Source Clock:      clk rising
@@ -616,11 +629,11 @@ Offset:              3.762ns (Levels of Logic = 1)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FD:C->Q               6   0.447   0.744  RS485_Frame_Transmitter/Tx_Busy (RS485_Frame_Transmitter/Tx_Busy)
+     FD:C->Q               5   0.447   0.714  RS485_Frame_Transmitter/Tx_Busy (RS485_Frame_Transmitter/Tx_Busy)
      OBUF:I->O                 2.571          DIR_RS485_OBUF (DIR_RS485)
     ----------------------------------------
-    Total                      3.762ns (3.018ns logic, 0.744ns route)
-                                       (80.2% logic, 19.8% route)
+    Total                      3.732ns (3.018ns logic, 0.714ns route)
+                                       (80.9% logic, 19.1% route)
 
 =========================================================================
 
@@ -639,14 +652,14 @@ clk            |    7.440|         |         |         |
 
 
 Total REAL time to Xst completion: 5.00 secs
-Total CPU time to Xst completion: 4.98 secs
+Total CPU time to Xst completion: 4.91 secs
  
 --> 
 
 
-Total memory usage is 392720 kilobytes
+Total memory usage is 392752 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :    8 (   0 filtered)
-Number of infos    :    3 (   0 filtered)
+Number of warnings :   11 (   0 filtered)
+Number of infos    :    4 (   0 filtered)
 
